@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="xupt.chioar.dao.ArticleDao">
+    <select id="getArticleById" parameterType="Long" resultType="xupt.chioar.domain.Article">
+        select * from article a where id =#{id}
+    </select>
+
+    <select id="getFirst10Article" resultType="xupt.chioar.domain.Article">
+        select a.*,c.name as category from article a,category c WHERE a.categoryId=c.id limit 10
+    </select>
+    
+    <select id="getArticlesByCategoryName" resultType="xupt.chioar.domain.Article" parameterType="Long">
+         SELECT a.*,c.name as category FROM article a,category c WHERE a.categoryId=c.id AND categoryId=#{categoryId}
+    </select>
+
+    <select id="getCategories" resultMap="categoryType">
+        select * from category
+    </select>
+    <resultMap id="categoryType" type="xupt.chioar.domain.Category">
+        <result property="displayName" column="display_name"/>
+    </resultMap>
+
+    <insert id="writeBlog" parameterType="xupt.chioar.domain.Article">
+        insert  into article(title,content,categoryId,summary,date) values (#{title},#{content},#{categoryId},#{summary},#{date})
+    </insert>
+
+    <select id="getCategoryIdByName" parameterType="string" resultType="long">
+        select id from category where name =#{name}
+    </select>
+
+    <delete id="deleteArticleById" parameterType="long">
+        delete from article where id =#{id}
+    </delete>
+
+    <update id="updateArticleById" parameterType="xupt.chioar.domain.Article">
+        update article set title=#{title},content=#{content},summary=#{summary},date=#{date} where id=#{id}
+    </update>
+    <!--问题点（多打了一个空格 导致dao层接口与此处的sql未匹配）-->
+    <select id="getCategoryById" parameterType="long" resultMap="categoryType">
+         select * from category where id=#{id}
+    </select>
+
+    <select id="getArticleBySearch" parameterType="string" resultType="xupt.chioar.domain.Article">
+        select * from article a where title like CONCAT('%',#{content},'%')
+    </select>
+</mapper>
