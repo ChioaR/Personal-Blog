@@ -12,7 +12,7 @@
     <url>http://maven.apache.org</url>
 
     <properties>
-        <spring.verson>4.3.7.RELEASE</spring.verson>
+        <spring.verson>5.3.18</spring.verson>
         <jackson.verson>2.9.5</jackson.verson>
     </properties>
 
