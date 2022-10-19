@@ -13,7 +13,7 @@
 
     <properties>
         <spring.verson>4.3.7.RELEASE</spring.verson>
-        <jackson.verson>2.9.5</jackson.verson>
+        <jackson.verson>2.13.4.1</jackson.verson>
     </properties>
 
     <dependencies>
